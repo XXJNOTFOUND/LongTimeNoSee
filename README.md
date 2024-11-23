@@ -1,2 +1,2 @@
 # LongTimeNoSee
-A reminder to you how long it has been since my world plugin was launched
+这是一个提醒你多久没上线了的MC插件！
