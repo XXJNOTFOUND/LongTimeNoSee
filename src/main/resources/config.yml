@@ -1,13 +1,13 @@
 # 是否启用首次登录提醒
-enable-first-login-message: false
+enable-first-login-message: true
 
 # 是否启用再次登录提醒
 enable-rejoin-message: true
 
 # 首次登录消息模板
-# 支持 {player} 占位符、& 颜色代码、RGB 颜色代码 {#RRGGBB}
-first-login-message: "&a欢迎回来，{player}！这是你的&6首次登录&f！"
+# 支持 {player} 占位符、& 颜色代码
+first-login-message: "&a欢迎回来，{player}！这是你的首次登录！"
 
 # 再次登录消息模板
-# 支持 {player}、{last_online}、{days}、{hours}、{minutes}、{seconds}，以及 PlaceholderAPI 占位符
-rejoin-message: "&b欢迎回来，{player}！你上次在线是 {#FF5733}{last_online}&b，距今已经 &e{days} 天 {hours} 小时 {minutes} 分钟 {seconds} 秒。"
+# 支持 {player}、{last_online}、{days}、{hours}、{minutes}、{seconds}
+rejoin-message: "&b欢迎回来，{player}！你上次在线是 {last_online}，距今 {days} 天 {hours} 小时 {minutes} 分钟 {seconds} 秒。"
