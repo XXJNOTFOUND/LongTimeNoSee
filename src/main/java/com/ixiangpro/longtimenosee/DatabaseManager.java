@@ -54,6 +54,20 @@ public class DatabaseManager {
         }
     }
 
+    public String getFirstLoginTime(String playerName) {
+        String query = "SELECT player_firstlogin FROM players WHERE player_name = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, playerName);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("player_firstlogin");
+            }
+        } catch (SQLException e) {
+            plugin.getLogger().severe("查询首次登录时间失败：" + e.getMessage());
+        }
+        return null;
+    }
+
     public LocalDateTime getLastLogoutDateTime(String playerName) {
         String query = "SELECT player_lastoffline FROM players WHERE player_name = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
