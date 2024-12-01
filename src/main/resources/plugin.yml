@@ -1,5 +1,5 @@
 name: LongTimeNoSee
-version: 1.0
+version: 1.1
 main: com.ixiangpro.longtimenosee.LongTimeNoSee
 api-version: 1.16
 description: 记录玩家下线时间，并在下次上线时提醒
