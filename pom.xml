@@ -4,7 +4,7 @@
 
     <groupId>com.ixiangpro</groupId>
     <artifactId>LongTimeNoSee</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <name>LongTimeNoSee</name>
     <description>记录玩家下线时间，并在上线时提醒</description>
 
@@ -22,6 +22,17 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>spigotmc-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>sonatype</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
