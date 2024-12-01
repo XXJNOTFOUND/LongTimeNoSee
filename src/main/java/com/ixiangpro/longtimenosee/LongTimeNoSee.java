@@ -12,14 +12,6 @@ public class LongTimeNoSee extends JavaPlugin {
         databaseManager = new DatabaseManager(this);
         databaseManager.initializeDatabase();
 
-        // 注册 PlaceholderAPI 扩展
-        if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            new LTNCExpansion(this).register();
-            getLogger().info("PlaceholderAPI 扩展已注册！");
-        } else {
-            getLogger().warning("未检测到 PlaceholderAPI，扩展功能不可用！");
-        }
-
         getServer().getPluginManager().registerEvents(new PlayerEventListener(this, databaseManager), this);
         getLogger().info("LongTimeNoSee 插件已启用！");
     }
