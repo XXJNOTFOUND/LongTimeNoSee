@@ -33,6 +33,9 @@ public class DatabaseManager {
     }
 
     public void saveFirstLoginTime(String playerName, LocalDateTime time) {
+        if (connection == null || isConnectionClosed()) {
+            initializeDatabase(); // 自动重连
+        }
         String query = "INSERT OR IGNORE INTO players (player_name, player_firstlogin) VALUES (?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, playerName);
@@ -44,6 +47,9 @@ public class DatabaseManager {
     }
 
     public void saveLogoutTime(String playerName, LocalDateTime time) {
+        if (connection == null || isConnectionClosed()) {
+            initializeDatabase(); // 自动重连
+        }
         String query = "UPDATE players SET player_lastoffline = ? WHERE player_name = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, time.format(DATE_FORMATTER));
@@ -55,6 +61,9 @@ public class DatabaseManager {
     }
 
     public String getFirstLoginTime(String playerName) {
+        if (connection == null || isConnectionClosed()) {
+            initializeDatabase(); // 自动重连
+        }
         String query = "SELECT player_firstlogin FROM players WHERE player_name = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, playerName);
@@ -69,6 +78,9 @@ public class DatabaseManager {
     }
 
     public LocalDateTime getLastLogoutDateTime(String playerName) {
+        if (connection == null || isConnectionClosed()) {
+            initializeDatabase(); // 自动重连
+        }
         String query = "SELECT player_lastoffline FROM players WHERE player_name = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, playerName);
@@ -90,6 +102,15 @@ public class DatabaseManager {
             }
         } catch (SQLException e) {
             plugin.getLogger().severe("关闭数据库失败：" + e.getMessage());
+        }
+    }
+
+    private boolean isConnectionClosed() {
+        try {
+            return connection == null || connection.isClosed();
+        } catch (SQLException e) {
+            plugin.getLogger().severe("检查数据库连接状态失败：" + e.getMessage());
+            return true;
         }
     }
 }

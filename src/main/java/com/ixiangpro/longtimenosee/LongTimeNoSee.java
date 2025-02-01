@@ -24,7 +24,4 @@ public class LongTimeNoSee extends JavaPlugin {
         getLogger().info("LongTimeNoSee 插件已禁用！");
     }
 
-    public DatabaseManager getDatabaseManager() {
-        return databaseManager;
-    }
 }

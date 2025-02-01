@@ -4,7 +4,7 @@
 
     <groupId>com.ixiangpro</groupId>
     <artifactId>LongTimeNoSee</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version> <!-- 版本更新 -->
     <name>LongTimeNoSee</name>
     <description>记录玩家下线时间，并在上线时提醒</description>
 
@@ -20,6 +20,12 @@
             <artifactId>spigot-api</artifactId>
             <version>1.21.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.44.1.0</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

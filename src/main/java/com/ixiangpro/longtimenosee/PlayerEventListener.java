@@ -44,20 +44,21 @@ public class PlayerEventListener implements Listener {
         LocalDateTime lastLogoutTime = databaseManager.getLastLogoutDateTime(playerName);
         if (lastLogoutTime != null && enableRejoinMessage) {
             LocalDateTime now = LocalDateTime.now();
-            long days = java.time.Duration.between(lastLogoutTime, now).toDays();
-            long hours = java.time.Duration.between(lastLogoutTime, now).toHours() % 24;
-            long minutes = java.time.Duration.between(lastLogoutTime, now).toMinutes() % 60;
-            long seconds = java.time.Duration.between(lastLogoutTime, now).toSeconds() % 60;
+            java.time.Duration duration = java.time.Duration.between(lastLogoutTime, now); // 优化时间差计算
+            long days = duration.toDays();
+            long hours = duration.toHoursPart();
+            long minutes = duration.toMinutesPart();
+            long seconds = duration.toSecondsPart();
 
             String rejoinMessage = plugin.getConfig().getString("rejoin-message",
-                "&b欢迎回来，{player}！你上次在线是 {last_online}，距今 {days} 天 {hours} 小时 {minutes} 分钟 {seconds} 秒。");
+                    "&b欢迎回来，{player}！你上次在线是 {last_online}，距今 {days} 天 {hours} 小时 {minutes} 分钟 {seconds} 秒。");
             rejoinMessage = rejoinMessage
-                .replace("{player}", playerName)
-                .replace("{last_online}", lastLogoutTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-                .replace("{days}", String.valueOf(days))
-                .replace("{hours}", String.valueOf(hours))
-                .replace("{minutes}", String.valueOf(minutes))
-                .replace("{seconds}", String.valueOf(seconds));
+                    .replace("{player}", playerName)
+                    .replace("{last_online}", lastLogoutTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                    .replace("{days}", String.valueOf(days))
+                    .replace("{hours}", String.valueOf(hours))
+                    .replace("{minutes}", String.valueOf(minutes))
+                    .replace("{seconds}", String.valueOf(seconds));
 
             player.sendMessage(MessageUtils.parseColors(rejoinMessage));
         }
