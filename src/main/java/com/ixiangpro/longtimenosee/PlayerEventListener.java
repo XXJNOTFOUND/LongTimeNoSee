@@ -3,6 +3,7 @@ package com.ixiangpro.longtimenosee;
 import com.ixiangpro.longtimenosee.utils.MessageUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.Bukkit;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.entity.Player;
@@ -32,9 +33,15 @@ public class PlayerEventListener implements Listener {
         String firstLoginTime = databaseManager.getFirstLoginTime(playerName);
         if (firstLoginTime == null) {
             if (enableFirstLoginMessage) {
-                String message = plugin.getConfig().getString("first-login-message", "&a欢迎回来，{player}！这是你的首次登录！");
-                message = message.replace("{player}", playerName);
-                player.sendMessage(MessageUtils.parseColors(message));
+                final String message = plugin.getConfig().getString("first-login-message", "&a欢迎回来，{player}！这是你的首次登录！");
+                final String finalMessage = message.replace("{player}", playerName);
+                int delay = plugin.getConfig().getInt("delay-seconds", 3);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        player.sendMessage(MessageUtils.parseColors(finalMessage));
+                    }
+                }, delay * 20L); // 将秒转换为ticks（1秒=20 ticks）
             }
             databaseManager.saveFirstLoginTime(playerName, LocalDateTime.now());
             return;
