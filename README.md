@@ -12,7 +12,7 @@
 3. 重启服务器
 
 ## 配置
-编辑 `plugins/LongTimeNoSee/config.yml`：
+编辑 `plugins/LongTimeNoStee/config.yml`：
 ```yaml
 # 是否启用首次登录提醒
 enable-first-login-message: true
