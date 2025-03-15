@@ -30,7 +30,9 @@ jobs:
       uses: gradle/actions/setup-gradle@v4.0.0
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build
 
     - name: Publish to GitHub Packages
       run: ./gradlew publish
