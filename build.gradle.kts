@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.23"
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    `maven-publish`
 }
 
 java {
@@ -37,6 +38,26 @@ repositories {
   maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
   maven("https://oss.sonatype.org/content/repositories/snapshots")
   mavenLocal()
+  maven {
+    name = "GitHubPackages"
+    url = uri("https://maven.pkg.github.com/XXJNOTFOUND/LongTimeNoSee")
+    credentials {
+      username = System.getenv("USERNAME")
+      password = System.getenv("TOKEN")
+    }
+  }
+}
+
+publishing {
+  publications {
+    create<MavenPublication>("maven") {
+      groupId = "com.ixiangpro"
+      artifactId = "longtimenosee"
+      version = project.version.toString()
+
+      from(components["java"])
+    }
+  }
 }
 
 dependencies {
