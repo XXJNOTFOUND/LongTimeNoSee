@@ -44,11 +44,17 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
-    - name: Capture build artifacts
+    - name: Get version
+      id: version
+      run: |
+        VERSION=$(./gradlew properties -q | grep "version:" | awk '{print $2}')
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Upload JAR artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Build Artifacts
-        path: build/libs/
+        name: LongTimeNoSee-${{ steps.version.outputs.version }}.jar
+        path: build/libs/*.jar
 
     - name: Publish to GitHub Packages
       run: ./gradlew publish
