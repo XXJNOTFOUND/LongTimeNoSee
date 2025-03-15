@@ -10,7 +10,7 @@ java {
     }
 }
 
-version = "1.3.1"
+version = "1.3.5"
 
 tasks.jar {
     enabled = false
