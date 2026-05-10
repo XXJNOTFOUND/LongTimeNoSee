@@ -1,0 +1,9 @@
+target/
+src-backup/
+*.class
+.settings/
+.project
+.classpath
+*.iml
+.idea/
+*.log

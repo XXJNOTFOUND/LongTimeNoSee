@@ -1,0 +1,9 @@
+messages:
+  prefix: "§7[§bLongTimeNoSee§7] "
+  first-join: "§a欢迎来到服务器！这是你的第一次登录！"
+  return-join: "§e欢迎回来！你已经离线了: §c%days%天 %hours%小时 %minutes%分钟 %seconds%秒"
+  no-permission: "§c你没有权限执行此指令！"
+  reloaded: "§a插件配置已重载！"
+  check-usage: "§c用法: /ltns check <玩家名>"
+  player-not-found: "§c数据库中未找到该玩家的记录。"
+  check-result: "§e玩家 §a%player% §e最后一次下线是在 §c%time% §e前。"
