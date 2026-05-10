@@ -1,9 +1,10 @@
 name: LongTimeNoSee
-version: 1.5.1
+version: 1.6.0
 main: com.ixiangpro.longtimenosee.LongTimeNoSee
 api-version: 1.13
 author: iXiangPro
 description: 记录玩家最后一次下线时间，并在重新登录时显示离线时长。
+softdepend: [PlaceholderAPI]
 commands:
   ltns:
     description: LongTimeNoSee 主指令

@@ -1,5 +1,6 @@
 package com.ixiangpro.longtimenosee;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class LongTimeNoSee extends JavaPlugin {
@@ -24,6 +25,12 @@ public class LongTimeNoSee extends JavaPlugin {
         // 注册指令
         if (getCommand("ltns") != null) {
             getCommand("ltns").setExecutor(new CommandManager(this));
+        }
+
+        // 注册 PlaceholderAPI 扩展
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new LTNSPlaceholder(this).register();
+            getLogger().info("PlaceholderAPI 扩展已注册！");
         }
 
         getLogger().info("LongTimeNoSee 插件已启用！作者: iXiangPro");
