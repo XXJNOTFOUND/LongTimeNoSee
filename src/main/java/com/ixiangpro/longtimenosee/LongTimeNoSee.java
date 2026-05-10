@@ -5,10 +5,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class LongTimeNoSee extends JavaPlugin {
 
     private DatabaseManager databaseManager;
+    private DependencyDownloader dependencyDownloader;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
+
+        // 初始化依赖下载器
+        dependencyDownloader = new DependencyDownloader(this);
 
         // 初始化并连接数据库
         databaseManager = new DatabaseManager(this);
@@ -36,6 +40,10 @@ public class LongTimeNoSee extends JavaPlugin {
 
     public DatabaseManager getDatabaseManager() {
         return databaseManager;
+    }
+
+    public DependencyDownloader getDependencyDownloader() {
+        return dependencyDownloader;
     }
 
     /** 从 config.yml 读取消息，自动拼接前缀 */

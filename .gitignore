@@ -1,5 +1,8 @@
 target/
 src-backup/
+src-backup-v2/
+src-backup-v3/
+dependency-reduced-pom.xml
 *.class
 .settings/
 .project

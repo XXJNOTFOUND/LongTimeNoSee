@@ -7,7 +7,7 @@
 
     <groupId>com.ixiangpro</groupId>
     <artifactId>LongTimeNoSee</artifactId>
-    <version>1.4.0</version>
+    <version>1.5.1</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -28,6 +28,12 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.21.5-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.2.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

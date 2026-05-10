@@ -1,3 +1,21 @@
+# 数据库类型: sqlite 或 mysql
+database:
+  type: sqlite
+  # MySQL 配置（仅在 type: mysql 时生效）
+  mysql:
+    host: localhost
+    port: 3306
+    database: longtimenosee
+    username: root
+    password: ""
+
+# MySQL 驱动下载镜像源（仅在选用 MySQL 且本地无驱动时自动下载）
+# 按优先级依次尝试
+download_mirrors:
+  - "https://repo1.maven.org/maven2"
+  - "https://maven.aliyun.com/repository/public"
+  - "https://mirrors.cloud.tencent.com/nexus/repository/maven-public"
+
 messages:
   prefix: "§7[§bLongTimeNoSee§7] "
   first-join: "§a欢迎来到服务器！这是你的第一次登录！"
