@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - 'v*'
   pull_request:
   workflow_dispatch:
   release:
@@ -17,11 +19,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: 17
+          distribution: zulu
+          java-version: 21
+
       - name: Cache Maven packages
         uses: actions/cache@v4
         with:
@@ -33,42 +36,33 @@ jobs:
       - name: Set version
         run: |
           VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          BUILD_NUMBER=${GITHUB_RUN_NUMBER}
-          NEW_VERSION="${VERSION}-build${BUILD_NUMBER}"
-          
-          # 修改 plugin.yml 中的版本号
-          sed -i "s/version: .*/version: ${NEW_VERSION}/" src/main/resources/plugin.yml
-          
-          # 设置 Maven 的版本
-          mvn versions:set -DnewVersion=$NEW_VERSION
-          
-          echo "PLUGIN_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          echo "PLUGIN_VERSION=$VERSION" >> $GITHUB_ENV
 
-      # 构建
       - name: Build with Maven
-        run: mvn -B clean package shade:shade
+        run: mvn -B clean package
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: longtimenosee
+          name: LongTimeNoSee-${{ env.PLUGIN_VERSION }}
           path: target/*.jar
 
   release:
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'release'
+    if: startsWith(github.ref, 'refs/tags/v')
 
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
-          name: longtimenosee
+          name: LongTimeNoSee-${{ env.PLUGIN_VERSION }}
           path: ./release
 
-      - name: Upload to GitHub Release
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: ./release/*.jar
+          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
