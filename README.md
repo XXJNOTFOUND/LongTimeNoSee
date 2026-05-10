@@ -36,7 +36,7 @@ messages:
 
 ## 安装
 
-1. 下载 `LongTimeNoSee-1.4.0.jar`
+1. 下载 `LongTimeNoSee-X.X.X.jar`
 2. 将文件放入服务器的 `plugins` 文件夹
 3. 重启服务器
 
