@@ -53,4 +53,5 @@ mvn clean package
 
 ## 作者
 
-**iXiangPro** (Little-Xiang-cookie)
+- **iXiangPro**
+- **Little-Xiang-cookie**
